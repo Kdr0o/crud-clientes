@@ -7,17 +7,16 @@ function ClienteForm({ clienteEditando, setClienteEditando, atualizarLista }) {
     email: "",
     data_nascimento: "",
     profissao: "",
-    observacoes: ""
+    observacoes: "",
   });
 
-  // Quando clicar em "Editar", carrega os dados no formulário
   useEffect(() => {
     if (clienteEditando) {
       setCliente({
         ...clienteEditando,
         data_nascimento: clienteEditando.data_nascimento
           ? clienteEditando.data_nascimento.split("T")[0]
-          : ""
+          : "",
       });
     }
   }, [clienteEditando]);
@@ -25,7 +24,7 @@ function ClienteForm({ clienteEditando, setClienteEditando, atualizarLista }) {
   const handleChange = (e) => {
     setCliente({
       ...cliente,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -33,21 +32,18 @@ function ClienteForm({ clienteEditando, setClienteEditando, atualizarLista }) {
     e.preventDefault();
 
     if (clienteEditando) {
-      // UPDATE
       await api.put(`/clientes/${clienteEditando.id}`, cliente);
       setClienteEditando(null);
     } else {
-      // CREATE
       await api.post("/clientes", cliente);
     }
 
-    // Limpa o formulário
     setCliente({
       nome: "",
       email: "",
       data_nascimento: "",
       profissao: "",
-      observacoes: ""
+      observacoes: "",
     });
 
     atualizarLista();

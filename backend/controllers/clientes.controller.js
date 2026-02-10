@@ -1,15 +1,18 @@
 const db = require("../db");
 
-// Criar cliente
 exports.create = (req, res) => {
   const { nome, email, data_nascimento, profissao, observacoes } = req.body;
 
   if (!nome || !email || !data_nascimento || !profissao) {
-    return res.status(400).json({ erro: "Campos obrigatórios não preenchidos" });
+    return res
+      .status(400)
+      .json({ erro: "Campos obrigatórios não preenchidos" });
   }
 
   if (new Date(data_nascimento) >= new Date()) {
-    return res.status(400).json({ erro: "Data de nascimento deve ser anterior a hoje" });
+    return res
+      .status(400)
+      .json({ erro: "Data de nascimento deve ser anterior a hoje" });
   }
 
   const checkEmail = "SELECT id FROM clientes WHERE email = ?";
@@ -32,12 +35,11 @@ exports.create = (req, res) => {
       (err) => {
         if (err) return res.status(500).json(err);
         res.status(201).json({ mensagem: "Cliente cadastrado com sucesso" });
-      }
+      },
     );
   });
 };
 
-// Listar clientes
 exports.findAll = (req, res) => {
   db.query("SELECT * FROM clientes", (err, result) => {
     if (err) return res.status(500).json(err);
@@ -45,7 +47,6 @@ exports.findAll = (req, res) => {
   });
 };
 
-// Atualizar cliente
 exports.update = (req, res) => {
   const { id } = req.params;
   const { nome, email, data_nascimento, profissao, observacoes } = req.body;
@@ -66,11 +67,10 @@ exports.update = (req, res) => {
     (err) => {
       if (err) return res.status(500).json(err);
       res.json({ mensagem: "Cliente atualizado com sucesso" });
-    }
+    },
   );
 };
 
-// Remover cliente
 exports.remove = (req, res) => {
   const { id } = req.params;
 

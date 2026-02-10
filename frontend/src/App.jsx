@@ -29,7 +29,6 @@ function App() {
         setClienteEditando={setClienteEditando}
         atualizarLista={carregarClientes}
       />
-
     </>
   );
 }

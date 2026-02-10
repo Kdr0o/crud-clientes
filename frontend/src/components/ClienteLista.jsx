@@ -1,14 +1,12 @@
 import api from "../services/api";
 
 function ClienteLista({ clientes, setClienteEditando, atualizarLista }) {
-
   const excluirCliente = async (id) => {
     const confirmacao = window.confirm("Deseja excluir este cliente?");
     if (!confirmacao) return;
 
     await api.delete(`/clientes/${id}`);
 
-    // Atualiza a lista depois de excluir
     atualizarLista();
   };
 
@@ -20,7 +18,7 @@ function ClienteLista({ clientes, setClienteEditando, atualizarLista }) {
         <p>Nenhum cliente cadastrado.</p>
       ) : (
         <ul className="list-group">
-          {clientes.map(c => (
+          {clientes.map((c) => (
             <li key={c.id} className="list-group-item">
               <div className="d-flex justify-content-between align-items-center">
                 <span>
