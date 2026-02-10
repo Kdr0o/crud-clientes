@@ -6,6 +6,14 @@ O sistema permite cadastrar, listar, editar e excluir clientes, utilizando um ba
 
 ---
 
+### Senha
+
+senha que está pedindo no codigo:
+
+```bash
+climba
+```
+
 ## Tecnologias utilizadas
 
 ### Backend
@@ -112,3 +120,4 @@ npm run dev
 ```
 
 O frontend ficará disponível em `http://localhost:5173`.
+
